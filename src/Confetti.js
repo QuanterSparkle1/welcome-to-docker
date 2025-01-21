@@ -1,6 +1,9 @@
 import Particles from "react-particles";
 import { useCallback } from "react";
 import { loadFull } from "tsparticles";
+import { loadEmojiShape } from "@tsparticles/shape-emoji";
+
+
 
 const Confetti = () => {
 
@@ -9,6 +12,10 @@ const Confetti = () => {
         // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
         // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
         // starting from v2 you can add only the features you need reducing the bundle size
+        (async () => {
+          await loadEmojiShape(tsParticles);
+        })();
+
         await loadFull(engine);
     }, []);
 
@@ -152,24 +159,33 @@ const Confetti = () => {
                         }
                     },
                     shape: {
-                        type: [
-                            "square",
-                            "triangle",
-                            "polygon"
-                        ],
-                        options: {
-                            polygon: [
-                                {
-                                    sides: 5
-                                },
-                                {
-                                    sides: 6
-                                }
-                            ]
+                        character: [
+                            {
+                              fill: true,
+                              font: "Verdana",
+                              value: ["💩", "🤡", "🍀", "🍙"],
+                              style: "",
+                              weight: 400
+                            }
+                          ],
+                          image: {
+                            height: 100,
+                            replace_color: true,
+                            src: "images/github.svg",
+                            width: 100
+                          },
+                          polygon: { nb_sides: 5 },
+                          stroke: { color: "random", width: 1 },
+                          type: "char"
+                        },
+                        size: {
+                          anim: { enable: true, minimumValue: 8, speed: 20, sync: false },
+                          random: { minimumValue: 8, enable: true },
+                          value: 32
                         }
                     }
                 }
-            }}
+            }
         />
     );
 }
