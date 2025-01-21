@@ -14,7 +14,6 @@ COPY ./public ./public
 # Install node packages, install serve, build the app, and remove dependencies at the end
 RUN npm install \
     && npm install -g serve \
-    && npm install @tsparticles/shape-emoji\
     && npm run build \
     && rm -fr node_modules
 
